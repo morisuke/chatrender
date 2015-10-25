@@ -9,8 +9,10 @@ TimeLineView.prototype.getMessagePanel = function(a, b) {
 	$message.find('a[href$=".gif"], a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"]')
 		.each(function () {
 			this.innerHTML = null;
-			$('<img style="display:box; height:250px; border:1px solid #CCC;" />')
-				.attr("src", $(this).attr("href")).appendTo(this);
+			$('<img>')
+				.attr("src", $(this).attr("href"))
+				.addClass('inline-open')
+				.appendTo(this);
 		});
 	
 	// code highlight
@@ -22,7 +24,7 @@ TimeLineView.prototype.getMessagePanel = function(a, b) {
 	var html = $message.html().replace(/\[commit.*?\][\r\n]?([\s\S]*?)\[\/commit\][\r\n]?/gi, function(k, v) {
 
 		v = v.replace(/\[.+?\]/gi, function(v) {
-			var labelStyle.color = projectColor[v];
+			var color = projectColor[v];
 			return '<p><strong style="color:' + color + '">' + v + '</strong></p><hr>';
 		});
 		

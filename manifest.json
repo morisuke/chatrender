@@ -12,7 +12,7 @@
 		{
 			"matches": ["https://www.chatwork.com/*"],
 			"js": ["loader.js"],
-			"css": ["css/monokai_sublime.css"]
+			"css": ["css/monokai_sublime.css", "css/style.css"]
 		}
 	],
 	"web_accessible_resources":[

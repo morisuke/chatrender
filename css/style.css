@@ -1,0 +1,10 @@
+img.inline-open {
+	display:box;
+	height:250px;
+	width: auto;
+	border:1px solid #CCC;
+}
+
+img.inline-open:hover {
+	opacity: 0.9;
+}
