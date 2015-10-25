@@ -1,0 +1,23 @@
+{
+	"name": "ChatRender",
+	"version": "0.0.1",
+	"manifest_version": 2,
+	"description": "チャットワークのレンダリングに介入する",
+	"content_scripts": [
+		{
+			"matches": ["https://www.chatwork.com/*"],
+			"js": ["preloader.js"],
+			"run_at": "document_start"
+		},
+		{
+			"matches": ["https://www.chatwork.com/*"],
+			"js": ["loader.js"],
+			"css": ["css/monokai_sublime.css"]
+		}
+	],
+	"web_accessible_resources":[
+		"js/main.js",
+		"js/highlight.min.js"
+	]
+}
+
