@@ -4,6 +4,31 @@ TimeLineView.prototype.getMessagePanelOld = TimeLineView.prototype.getMessagePan
 TimeLineView.prototype.getMessagePanel = function(a, b) {
 	var message_panel = this.getMessagePanelOld(a, b);
 	var $message      = $('<div>').html(message_panel);
+	
+	// commit message
+	var html = $message.html()
+
+		.replace(/\[commit.*?\][\r\n]?([\s\S]*?)\[\/commit\][\r\n]?/gi, function(k, v) {
+
+			v = v.replace(/\[.+?\]/gi, function(v) {
+				var color = projectColor[v];
+				return '<p><strong style="color:' + color + '">' + v + '</strong></p><hr>';
+			});
+			
+			return v;
+		})
+		
+		// マークダウンを開始
+		.replace(/\[mk.*?\][\r\n]?([\s\S]*?)\[\/mk\][\r\n]?/gi, function(k, v){
+			
+			return marked(v);
+
+		})
+
+	// codeタグだけ内部のエスケープを解除
+	$message.html(html).find('code').each(function(){
+		$(this).html($(this).text());
+	});
 
 	// image inline preview
 	$message.find('a[href$=".gif"], a[href$=".jpg"], a[href$=".jpeg"], a[href$=".png"]')
@@ -16,22 +41,10 @@ TimeLineView.prototype.getMessagePanel = function(a, b) {
 		});
 	
 	// code highlight
-	$message.find('code').each(function() {
+	$message.find('code').addClass('chatCode').each(function() {
 		hljs.highlightBlock(this);
 	});
-	
-	// commit message
-	var html = $message.html().replace(/\[commit.*?\][\r\n]?([\s\S]*?)\[\/commit\][\r\n]?/gi, function(k, v) {
 
-		v = v.replace(/\[.+?\]/gi, function(v) {
-			var color = projectColor[v];
-			return '<p><strong style="color:' + color + '">' + v + '</strong></p><hr>';
-		});
-		
-		return v;
-	});
-
-	$message.html(html);
 	return $message.html();
 };
 

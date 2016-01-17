@@ -17,7 +17,8 @@
 	],
 	"web_accessible_resources":[
 		"js/main.js",
-		"js/highlight.min.js"
+		"js/highlight.min.js",
+		"js/marked.js"
 	]
 }
 

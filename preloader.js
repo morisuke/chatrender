@@ -1,4 +1,4 @@
-var targets = ['js/highlight.min.js'];
+var targets = ['js/highlight.min.js', 'js/marked.js'];
 
 targets.forEach(function(js){
     var scriptElement = document.createElement('script');
